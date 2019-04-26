@@ -1,12 +1,15 @@
 const reg = /^((?:(?:\d+)(?:\.\d+)?)|(?:)|(?:(?:(?:\d+)(?:\.\d+)?)\/(?:(?:\d+)(?:\.\d+)?)))[a-zA-z]+$/;
 const reg2 = /([a-zA-z]+)$/;
+const galToL = 3.78541;
+const lbsToKg = 0.453592;
+const miToKm = 1.60934;
 const unitsMap = {
-  'gal': ['l', 'gallons', x => x * 3.78541],
-  'l': ['gal', 'liters', x => x / 3.78541],
-  'lbs': ['kg', 'pounds', x => x * 0.453592],
-  'kg': ['lbs', 'kilograms', x => x / 0.453592],
-  'mi': ['km', 'miles', x => x * 1.60934],
-  'km': ['mi', 'kilometres', x => x / 1.60934]
+  'gal': ['l', 'gallons', x => x * galToL],
+  'l': ['gal', 'liters', x => x / galToL],
+  'lbs': ['kg', 'pounds', x => x * lbsToKg],
+  'kg': ['lbs', 'kilograms', x => x / lbsToKg],
+  'mi': ['km', 'miles', x => x * miToKm],
+  'km': ['mi', 'kilometres', x => x / miToKm]
 };
 const unitsList = Object.keys(unitsMap);
 
@@ -41,9 +44,6 @@ function ConvertHandler() {
   };
   
   this.convert = function(initNum, initUnit) {
-    const galToL = 3.78541;
-    const lbsToKg = 0.453592;
-    const miToKm = 1.60934;
     return Number(unitsMap[initUnit.toLowerCase()][2](+initNum).toFixed(5));
   };
   
